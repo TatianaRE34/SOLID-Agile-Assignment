@@ -8,9 +8,10 @@ public class User {
         private int countDown;
         private String couponCode;
         private boolean hasCoupon=false;
+        private double buyMovie;
         private String type;//can be only 'T' or 'S'
 
-        public User(String name, String email, String password, String[] favorite, String[] purchase, String[] wishList, int countDown, String couponCode, String type){
+        public User(String name, String email, String password, double price,String[] favorite, String[] purchase, String[] wishList, int countDown, String couponCode, String type){
             this.name=name;
             this.email=email;
             this.password=password;
@@ -20,6 +21,7 @@ public class User {
             this.countDown=countDown;
             this.couponCode=couponCode;
             this.type=type;
+            this.buyMovie=price;
         }
 
         //set and get methods
@@ -27,9 +29,11 @@ public class User {
         public void logOut(){};
 
         //LSP
-        public void purchase(){
+        public void purchaseMovie(){
             if (hasCoupon==true && type.equals('S')){
-                System.out.println("The purhase new price is calculated with the coupon discount applied and deactivate coupon");
+                System.out.println("The purchase new price is calculated with the coupon discount applied and deactivate coupon");
+            }else{
+                System.out.println("Sells at usual price");
             }
         };
         public void watch(){};
@@ -49,7 +53,7 @@ public class User {
                     System.out.println("Trial is over, Subscribe to service to watch more movies.");
                 }else{
                     deduceCount();
-                    purchase();
+                    purchaseMovie();
                     watch();
                     addFavorite();
                     rateMovie();
@@ -57,7 +61,7 @@ public class User {
                 }
             }else if (type.equals('S')){
                 loadWishListOpts();
-                purchase();
+                purchaseMovie();
                 watch();
                 addFavorite();
                 rateMovie();
