@@ -1,6 +1,9 @@
-package OCP;
+package LSP;
 
-public class SubscribedUser extends User{
+
+import OCP.User;
+
+public class SubscribedUser extends User {
     private String[] wishList;
     private String couponCode;
     private boolean hasCoupon=false;
@@ -17,17 +20,18 @@ public class SubscribedUser extends User{
         removeFromWishlist();
     };
 
-
-    public void purchaseMovie(){
-        if (hasCoupon==true){
-            System.out.println("The purhase new price is calculated with the coupon discount applied and deactivate coupon");
-        }
-    };
     public void login(){
         loadWishListOpts();
-        purchaseMovie();
-        super.watch();
-        super.addFavorite();
-        super.rateMovie();
+        purchase();
+        watch();
+        addFavorite();
+        rateMovie();
     }
+    public void purchase(){
+        if (hasCoupon==true){
+            this.couponCode=couponCode;
+            purchaseMovie();
+            super.purchaseMovie();
+        }
+    };
 }
